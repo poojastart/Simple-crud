@@ -1,0 +1,22 @@
+<div class="product-details-wrapper container mt-5">
+  <h1 class="mb-4 text-center">Product Details</h1>
+  <%= turbo_frame_tag "first_turbo_frame" do %>
+    <div class="card shadow-sm rounded">
+      <div class="card-body position-relative">
+        <% if @product.image.attached? %>
+          <%= image_tag url_for(@product.image), class: "float-end ms-3 mb-2", style: "width: 150px;" %>
+        <% end %>
+        <h2 class="card-title"><%= @product.name %></h2>
+        <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+        <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
+        <div class="text-end">
+          <%= link_to "Edit", edit_product_path(@product), class: "btn btn-outline-secondary me-1" %>
+          <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+    </div>
+    <% end %>
+</div>
