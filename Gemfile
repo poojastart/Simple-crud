@@ -64,3 +64,4 @@ end
 gem "devise", "~> 4.9.4"
 gem "stripe"
 gem "kaminari"
+gem "redis"

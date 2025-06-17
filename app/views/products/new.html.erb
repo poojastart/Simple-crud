@@ -1,6 +1,6 @@
 <div class="product-new-wrapper container mt-5">
   <h1 class="mb-4 text-center">New Product</h1>
-  <%= turbo_frame_tag "first_turbo_frame" do %>
+  <%= turbo_frame_tag @product do %>
 
     <%= form_with(model: @product, local: true, html: { multipart: true }) do |form| %>
       <div class="mb-3">

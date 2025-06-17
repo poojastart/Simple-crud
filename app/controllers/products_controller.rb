@@ -11,8 +11,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      # render json: @product, status: :created
-      redirect_to @product, notice: 'Product created successfully'
+      respond_to do |format|
+        redirect_to @product, notice: 'Product created successfully'
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
