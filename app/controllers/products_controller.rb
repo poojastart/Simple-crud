@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy, :edit]
   def index
     @products = Product.page params[:page]
+    @products = @products.ordered
   end
 
   def new
@@ -26,15 +27,24 @@ class ProductsController < ApplicationController
   end
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product Updted successfully'
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @product, notice: 'Product Updted successfully' }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.turbo_stream
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
   def destroy
     if @product.destroy
-      redirect_to products_path, notice: 'Product deleted successfully'
+      respond_to do |format|
+        format.html{ redirect_to @products, notice: 'Product deleted successfully' }
+        format.turbo_stream
+      end
     end
   end
 

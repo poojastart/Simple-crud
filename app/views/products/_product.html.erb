@@ -4,8 +4,14 @@
   <td><%= number_to_currency(product.price) %></td>
   <td><%= product.description %></td>
   <td class="text-center">
-    <%= link_to "Show", product_path(product), class: "btn btn-sm btn-outline-secondary me-1" %>
-    <%= link_to "Edit", edit_product_path(product), class: "btn btn-sm btn-outline-secondary me-1" %>
-    <%= button_to "Delete", product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-secondary" %>
+    <%= link_to product_path(product), class: "btn btn-sm btn-outline-secondary me-1 d-inline-block", title: "Show" do %>
+      <i class="bi bi-eye"></i>
+    <% end %>
+    <%= link_to edit_product_path(product), class: "btn btn-sm btn-outline-secondary me-1 d-inline-block", title: "Edit" do %>
+      <i class="bi bi-pencil"></i>
+    <% end %>
+    <%= button_to product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-secondary d-inline-block", title: "Delete", form: { class: "d-inline-block" } do %>
+      <i class="bi bi-trash"></i>
+    <% end %>
   </td>
 </tr>

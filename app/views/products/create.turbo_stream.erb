@@ -1,2 +1,2 @@
-<%= turbo_stream.prepend "products", partial: "products/products", locals: { product: @product } %>
+<%= turbo_stream.append "products", partial: "products/products", locals: { product: @product } %>
 <%= turbo_stream.update Product.new, "" %>

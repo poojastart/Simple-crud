@@ -25,12 +25,8 @@
 
       <div class="text-end">
         <%= form.submit "Create Product", class: "btn btn-primary" %>
-        <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary ms-2" %>
+        <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary ms-2", data: { turbo_frame: "_top" } %>
       </div>
     <% end %>
-
-    <div class="text-center mt-4">
-    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
-    </div>
     <% end %>
 </div>

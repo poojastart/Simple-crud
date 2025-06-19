@@ -1,23 +1,29 @@
+<!-- filepath: /home/startbit/simple-crud/app/views/products/index.html.erb -->
 <%= turbo_stream_from "products" %>
-<div class="products-list-wrapper container mt-5">
-<%= turbo_frame_tag @product %>
-  <h1 class="mb-4 text-center">Products List</h1>
-  <% if @products.any? %>
-    
-    <%= render partial: "products/products", locals: { products: @products } %>
-
-    <div class="text-end mt-3">
-    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+<div class="container mt-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-header inherit-bg border-0 pb-0">
+      <h1 class="mb-0 text-center fw-bold" style="letter-spacing: 1px;">Products List</h1>
     </div>
-  <% else %>
-    <div class="alert alert-info text-center mt-4">
-      No products found.
+    <div class="card-body">
+      <% if @products.any? %>
+        <%= render partial: "products/products", locals: { products: @products } %>
+        <div class="text-end mt-3">
+          <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary" %>
+        </div>
+      <% else %>
+        <div class="alert alert-info text-center mt-4">
+          No products found.
+        </div>
+        <div class="text-center mt-3">
+          <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
     </div>
-    <div class="text-center mt-3">
-      <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+    <div class="card-footer border-0">
+      <div class="d-flex justify-content-center mt-2">
+        <%= paginate @products %>
+      </div>
     </div>
-  <% end %>        
-  <div class="d-flex justify-content-center mt-4">
-    <%= paginate @products %>
   </div>
 </div>
