@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Móviles y Más</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 15px;
+        }
+        
+        .price-original {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .price-current {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .savings {
+            background: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .btn-add-cart {
+            background: #ff5722;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .btn-add-cart:hover {
+            background: #e64a19;
+            color: white;
+        }
+        
+        .filter-sidebar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .badge-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 2px;
+            font-size: 0.75rem;
+            border-radius: 12px;
+        }
+        
+        .badge-novedad {
+            background: #ffc107;
+            color: #000;
+        }
+        
+        .badge-regalo {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .badge-gratis {
+            background: #28a745;
+            color: white;
+        }
+        
+        .navbar-custom {
+            background: #2c3e50;
+        }
+        
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important;
+        }
+        
+        .breadcrumb-item a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+        
+        .color-blue { background: #007bff; }
+        .color-black { background: #000; }
+        .color-gold { background: #ffd700; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand text-white" href="#">
+                <span style="color: #f39c12;">móviles</span><span style="color: #e74c3c;">y</span><span style="color: #3498db;">más</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="background: #f39c12; border-radius: 4px;">Móviles Libres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tablets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Accesorios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Comparador</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">OFERTAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">OUTLET</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">NOTICIAS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Móviles Libres</a></li>
+                <li class="breadcrumb-item active">Samsung</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <!-- Sidebar Filters -->
+            <div class="col-lg-3 mb-4">
+                <div class="filter-sidebar">
+                    <!-- Brand Header -->
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://via.placeholder.com/40x40/1f4e79/ffffff?text=S" alt="Samsung" class="me-2">
+                        <div>
+                            <h5 class="mb-0">Móviles Samsung</h5>
+                            <small class="text-muted">Móviles Samsung Libres</small>
+                        </div>
+                    </div>
+                    
+                    <p class="small text-muted mb-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus eleifend purus, id suscipit libero egestas quis.
+                    </p>
+
+                    <!-- Price Filter -->
+                    <div class="mb-4">
+                        <h6 class="filter-title">PRECIO</h6>
+                        <div class="d-flex align-items-center">
+                            <span class="small">Precio Máximo: 1000€</span>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="1000" value="1000">
+                    </div>
+
+                    <!-- OS Filter -->
+                    <div class="mb-4">
+                        <h6 class="filter-title">SISTEMA OPERATIVO</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="android">
+                            <label class="form-check-label" for="android">Android</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="ios">
+                            <label class="form-check-label" for="ios">iOS</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="windows">
+                            <label class="form-check-label" for="windows">Windows Phone</label>
+                        </div>
+                    </div>
+
+                    <!-- Screen Size -->
+                    <div class="mb-4">
+                        <h6 class="filter-title">TAMAÑO PANTALLA</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="size1">
+                            <label class="form-check-label" for="size1">Hasta 5.5"</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="size2">
+                            <label class="form-check-label" for="size2">De 5.5" a 6.5"</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="size3" checked>
+                            <label class="form-check-label" for="size3"><strong>Más de 6.5"</strong></label>
+                        </div>
+                    </div>
+
+                    <!-- Internal Memory -->
+                    <div class="mb-4">
+                        <h6 class="filter-title">MEMORIA INTERNA</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mem1">
+                            <label class="form-check-label" for="mem1">Hasta 32GB</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mem2">
+                            <label class="form-check-label" for="mem2">De 64GB a 128GB</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mem3">
+                            <label class="form-check-label" for="mem3">De 128GB a 256GB</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mem4">
+                            <label class="form-check-label" for="mem4">Más de 256GB</label>
+                        </div>
+                    </div>
+
+                    <!-- Other Brands -->
+                    <div class="mb-4">
+                        <h6 class="filter-title">OTRAS MARCAS DE MÓVILES</h6>
+                        <div class="small">
+                            <a href="#" class="text-decoration-none d-block mb-1">LG, iPhone, Alcatel, Motorola, Wileyfox, LG, iPhone, Alcatel, Motorola, Wileyfox, LG, iPhone, Alcatel, Motorola, Wileyfox, LG, iPhone, Alcatel, Motorola, Wileyfox, LG, iPhone, Alcatel, Motorola, Wileyfox, LG, iPhone, Alcatel, Motorola, Wileyfox...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <!-- Results Header -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Total 1000 productos</span>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+                            Ordenar por:
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Precio: menor a mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: mayor a menor</a></li>
+                            <li><a class="dropdown-item" href="#">Más populares</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="row g-3">
+                    <!-- Product 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-novedad position-absolute top-0 start-0 m-2">NOVEDAD</span>
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-regalo position-absolute top-0 start-0 m-2">REGALO</span>
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                    <div class="color-dot color-gold"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repeat for more products -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-novedad position-absolute top-0 start-0 m-2">NOVEDAD</span>
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-regalo position-absolute top-0 start-0 m-2">REGALO</span>
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product-card">
+                            <div class="position-relative">
+                                <span class="badge-tag badge-gratis position-absolute top-0 end-0 m-2">Envío GRATIS</span>
+                                <img src="https://via.placeholder.com/200x200/f8f9fa/6c757d?text=Samsung+Galaxy+S6" alt="Samsung Galaxy S6" class="product-image">
+                            </div>
+                            <div class="p-3">
+                                <h6 class="text-muted mb-1">SAMSUNG</h6>
+                                <h6 class="mb-2">Samsung Galaxy S6 Edge Plus</h6>
+                                <div class="color-options mb-2">
+                                    <div class="color-dot color-blue"></div>
+                                    <div class="color-dot color-black"></div>
+                                    <div class="color-dot color-gold"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="price-original">694€</span>
+                                    <span class="price-current ms-2">539€</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="savings">Ahorra 100€</span>
+                                </div>
+                                <button class="btn btn-add-cart mb-2">
+                                    <i class="fas fa-shopping-cart me-1"></i> Al carrito
+                                </button>
+                                <a href="#" class="text-decoration-none small">Añadir al comparador</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

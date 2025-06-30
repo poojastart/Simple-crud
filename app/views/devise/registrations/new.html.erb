@@ -1,33 +1,66 @@
-<div class="form-box"
-<h2>Sign up</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <div class="form-box">
+                  <h2 class="mb-4 text-center">Sign up</h2>
+                  
+                  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "pt-3" }) do |f| %>
+                    <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
+                    <div class="form-group">
+                      <%= f.label :email, class: "form-label" %>
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Email" %>
+                    </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-    <div class="field">
-      <%= f.label :role %><br />
-      <%= f.select :role, options_for_select([['owner'], ['customer']]), prompt: 'Select a role' %>
-    </div>
+                    <div class="form-group">
+                      <%= f.label :password, class: "form-label" %>
+                      <% if @minimum_password_length %>
+                        <small class="form-text text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+                      <% end %>
+                      <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Password" %>
+                    </div>
 
-    <div class="actions">
-      <%= f.submit "Sign up" %>
+                    <div class="form-group">
+                      <%= f.label :password_confirmation, class: "form-label" %>
+                      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Confirm Password" %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :role, class: "form-label" %>
+                      <%= f.select :role, options_for_select([['Owner', 'owner'], ['Customer', 'customer']]), { prompt: 'Select a role' }, class: "form-control form-control-lg" %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :avatar, "Avatar", class: "form-label" %>
+                      <%= f.file_field :avatar, accept: 'image/*', class: "form-control form-control-lg" %>
+                    </div>
+
+                    <div class="mt-3">
+                      <%= f.submit "Sign up", class: "btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" %>
+                    </div>
+                  <% end %>
+                  
+                  <div class="text-center mt-4 font-weight-light">
+                    Already have an account?
+                    <%= link_to "Login", new_session_path(resource_name), class: "text-primary" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <%= render "devise/shared/links" %>
   </div>
+
+</body>
+
+</html>

@@ -1,29 +1,139 @@
-<!-- filepath: /home/startbit/simple-crud/app/views/products/index.html.erb -->
-<%= turbo_stream_from "products" %>
-<div class="container mt-5">
-  <div class="card shadow-lg border-0">
-    <div class="card-header inherit-bg border-0 pb-0">
-      <h1 class="mb-0 text-center fw-bold" style="letter-spacing: 1px;">Products List</h1>
-    </div>
-    <div class="card-body">
-      <% if @products.any? %>
-        <%= render partial: "products/products", locals: { products: @products } %>
-        <div class="text-end mt-3">
-          <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary" %>
+<div class="container-scroller">
+
+  <%= render "layouts/navbar" %>
+  <div class="container-fluid page-body-wrapper">
+    <div class="theme-setting-wrapper">
+      <div id="settings-trigger"><i class="ti-settings"></i></div>
+      <div id="theme-settings" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <p class="settings-heading">SIDEBAR SKINS</p>
+        <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+        <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+        <p class="settings-heading mt-2">HEADER SKINS</p>
+        <div class="color-tiles mx-0 px-4">
+          <div class="tiles success"></div>
+          <div class="tiles warning"></div>
+          <div class="tiles danger"></div>
+          <div class="tiles info"></div>
+          <div class="tiles dark"></div>
+          <div class="tiles default"></div>
         </div>
-      <% else %>
-        <div class="alert alert-info text-center mt-4">
-          No products found.
-        </div>
-        <div class="text-center mt-3">
-          <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary" %>
-        </div>
-      <% end %>
-    </div>
-    <div class="card-footer border-0">
-      <div class="d-flex justify-content-center mt-2">
-        <%= paginate @products %>
       </div>
     </div>
-  </div>
+
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item">
+          <%= link_to root_path, class: "nav-link" do %>
+            <i class="ti-dashboard menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+        <%= link_to categories_path, class: "nav-link" do %><i class="ti-layers-alt menu-icon"></i>
+          <span class="menu-title">Categories</span>
+        <% end %>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <i class="icon-columns menu-icon"></i>
+            <span class="menu-title">Form elements</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="form-elements">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+            <i class="icon-bar-graph menu-icon"></i>
+            <span class="menu-title">Charts</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="charts">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">Tables</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="tables">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+            <i class="icon-contract menu-icon"></i>
+            <span class="menu-title">Icons</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="icons">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+            <i class="icon-ban menu-icon"></i>
+            <span class="menu-title">Error pages</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="error">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/documentation/documentation.html">
+            <i class="icon-paper menu-icon"></i>
+            <span class="menu-title">Documentation</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="main-panel">
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title mb-4 fw-bold">Top Products</h4>
+              <div class="mb-3">
+                <%= link_to "New Product", new_product_path, class: "btn btn-outline-primary", data: { turbo_frame: "_top" } %>
+              </div>
+              <div class="table-responsive">
+                <%= render partial: "products/products", locals: { products: @products } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        <%= paginate @products %>
+      </div>
+
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2025.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+        </div>
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
+        </div>
+      </footer> 
+    </div>
+  </div>   
 </div>

@@ -1,4 +1,3 @@
-<!-- filepath: /home/startbit/simple-crud/app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,59 +7,105 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <%= yield :head %>
+    
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="apple-touch-icon" href="/icon.png">
+    
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" %>
+    
     <%= javascript_importmap_tags %>
-
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link" %>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm ms-2" %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
+  <body>
     <% if notice.present? %>
-      <p class="notice alert alert-success text-center"><%= notice %></p>
+      <div class="notice alert alert-success text-center"><%= notice %></div>
     <% end %>
     <% if alert.present? %>
-      <p class="alert alert-danger text-center"><%= alert %></p>
+      <div class="alert alert-danger text-center"><%= alert %></div>
     <% end %>
+    <%= render 'layouts/announcement_bar' %>
+    <%= yield %>
+    
+    <script>
+      function initializeAllJS() {
+        if (typeof $ === 'undefined') {
+          var script = document.createElement('script');
+          script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+          script.onload = function() {
+            loadRemainingJS();
+          };
+          document.head.appendChild(script);
+        } else {
+          loadRemainingJS();
+        }
+      }
 
-    <div class="main-content container">
-      <%= yield %>
-    </div>
+      function loadRemainingJS() {
+        if (typeof window.Popper === 'undefined') {
+          var popperScript = document.createElement('script');
+          popperScript.src = 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js';
+          popperScript.onload = function() {
+            window.Popper = window.Popper || {};
+            loadBootstrap();
+          };
+          document.head.appendChild(popperScript);
+        } else {
+          loadBootstrap();
+        }
+      }
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+      function loadBootstrap() {
+        if (typeof window.bootstrap === 'undefined') {
+          var bootstrapScript = document.createElement('script');
+          bootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+          bootstrapScript.onload = function() {
+            loadThemeJS();
+          };
+          document.head.appendChild(bootstrapScript);
+        } else {
+          loadThemeJS();
+        }
+      }
+
+      function loadThemeJS() {
+        var themeFiles = [
+          '<%= asset_path("vendor.bundle.base.js") %>',
+          '<%= asset_path("off-canvas.js") %>',
+          '<%= asset_path("template.js") %>',
+          '<%= asset_path("hoverable-collapse.js") %>'
+        ];
+
+        themeFiles.forEach(function(src) {
+          if (!document.querySelector('script[src="' + src + '"]')) {
+            var script = document.createElement('script');
+            script.src = src;
+            script.setAttribute('data-turbo-track', 'reload');
+            document.head.appendChild(script);
+          }
+        });
+
+        setTimeout(function() {
+          if (typeof initTemplate === 'function') {
+            initTemplate();
+          }
+        }, 200);
+      }
+
+      document.addEventListener('DOMContentLoaded', initializeAllJS);
+      
+      document.addEventListener('turbo:load', function() {
+        setTimeout(initializeAllJS, 100);
+      });
+
+      document.addEventListener('turbo:render', function() {
+        setTimeout(initializeAllJS, 100);
+      });
+    </script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   </body>
 </html>

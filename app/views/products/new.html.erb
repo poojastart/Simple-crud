@@ -9,8 +9,18 @@
       </div>
 
       <div class="mb-3">
+        <%= form.label :category_id, "Category", class: "form-label" %>
+        <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select Category" }, { class: "form-control" } %>
+      </div>
+
+      <div class="mb-3">
         <%= form.label :price, class: "form-label" %>
         <%= form.number_field :price, step: "0.01", class: "form-control", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :compare_at_price, class: "form-label" %>
+        <%= form.number_field :compare_at_price, step: "0.01", class: "form-control" %>
       </div>
 
       <div class="mb-3">
@@ -24,7 +34,7 @@
       </div>
 
       <div class="text-end">
-        <%= form.submit "Create Product", class: "btn btn-primary" %>
+        <%= form.submit "Create Product", class: "btn btn-primary", data: { turbo_frame: "_top" } %>
         <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary ms-2", data: { turbo_frame: "_top" } %>
       </div>
     <% end %>

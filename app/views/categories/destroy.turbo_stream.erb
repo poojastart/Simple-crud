@@ -1,0 +1,6 @@
+<turbo-stream action="remove" target="category_<%= @category.id %>"></turbo-stream>
+<turbo-stream action="replace" target="category_form">
+  <template>
+    <%= render partial: 'form', formats: [:html], locals: { category: Category.new } %>
+  </template>
+</turbo-stream> 

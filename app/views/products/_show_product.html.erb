@@ -9,13 +9,13 @@
         <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
         <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
         <div class="text-end">
-          <%= link_to "Edit", edit_product_path(@product), class: "btn btn-outline-secondary me-1" %>
-          <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary" %>
+          <%= link_to "Edit", edit_product_path(@product), class: "btn btn-outline-secondary me-1" , data: { turbo_frame: "_top"}%>
+          <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary",  data: { turbo_frame: "_top"} %>
         </div>
       </div>
     </div>
     <div class="text-center mt-4">
-    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary",  data: { turbo_frame: "_top"} %>
     </div>
   <% end %>
 </div>

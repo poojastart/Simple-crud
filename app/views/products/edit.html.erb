@@ -1,34 +1,38 @@
 <div class="product-edit-wrapper container mt-5">
   <h1 class="mb-4 text-center">Edit Product</h1>
   <%= turbo_frame_tag @product do %>
-  <%= form_with(model: @product, local: true) do |form| %>
+    <%= form_with(model: @product, local: true, html: { multipart: true }) do |form| %>
     <div class="mb-3">
       <%= form.label :name, class: "form-label" %>
       <%= form.text_field :name, class: "form-control", required: true %>
     </div>
-
+      <div class="mb-3">
+        <%= form.label :category_id, "Category", class: "form-label" %>
+        <%= form.collection_select :category_id, @categories, :id, :name, { prompt: "Select Category" }, { class: "form-control" } %>
+      </div>
     <div class="mb-3">
       <%= form.label :price, class: "form-label" %>
       <%= form.number_field :price, step: "0.01", class: "form-control", required: true %>
     </div>
-
+      <div class="mb-3">
+        <%= form.label :compare_at_price, class: "form-label" %>
+        <%= form.number_field :compare_at_price, step: "0.01", class: "form-control" %>
+      </div>
     <div class="mb-3">
       <%= form.label :description, class: "form-label" %>
       <%= form.text_area :description, rows: 3, class: "form-control", required: true %>
     </div>
-
     <div class="mb-3">
       <%= form.label :image, class: "form-label" %>
       <%= form.file_field :image, accept: 'image/*', class: "form-control" %>
     </div>
-
     <div class="text-end">
       <%= form.submit "Update Product", class: "btn btn-primary" %>
-      <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary ms-2" , data: { turbo_frame: "_top" }%>
+        <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary ms-2", data: { turbo_frame: "_top" } %>
     </div>
   <% end %>
   <div class="text-center mt-4">
-    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
   </div>
   <% end %>
 </div>

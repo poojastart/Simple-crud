@@ -7,15 +7,32 @@
           <%= image_tag url_for(@product.image), class: "float-end ms-3 mb-2", style: "width: 150px;" %>
         <% end %>
         <h2 class="card-title"><%= @product.name %></h2>
-        <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
-        <div class="text-end">
+        <p class="card-text">
+          <strong>Category:</strong>
+          <% if @product.category.present? %>
+            <span class="badge bg-primary"><%= @product.category.name %></span>
+          <% else %>
+            <span class="badge bg-warning text-dark">No Category</span>
+          <% end %>
+        </p>
+        <p class="card-text mb-1"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+        <% if @product.compare_at_price.present? && @product.compare_at_price > @product.price %>
+          <p class="card-text mb-1"><strong>Compare at Price:</strong> <span class="text-decoration-line-through text-danger">
+          <%= number_to_currency(@product.compare_at_price) %></span> 
+          <span class="badge bg-success">On Sale!</span>
+          </p>
+        <% elsif @product.compare_at_price.present? %>
+          <p class="card-text mb-1"><strong>Compare at Price:</strong> <%= number_to_currency(@product.compare_at_price) %></p>
+        <% end %>
+        <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
+        <div class="text-end mt-3">
           <%= link_to "Edit", edit_product_path(@product), class: "btn btn-outline-secondary me-1" %>
-          <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary" , data: { turbo_frame: "_top" } %>
+          <%= link_to "Back to List", products_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
         </div>
       </div>
     </div>
     <div class="text-center mt-4">
-    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "New Product", new_product_path, class: "btn btn-outline-secondary", data: { turbo_frame: "_top" } %>
     </div>
   <% end %>
 </div>
