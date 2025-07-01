@@ -17,7 +17,7 @@
                 <h2>Log in</h2>
                 
                 <%= render "devise/shared/error_messages", resource: resource %>
-                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
                   <div class="form-group">
                     <%= f.label :email, class: "form-label" %><br />
                     <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control form-control-lg" %>
