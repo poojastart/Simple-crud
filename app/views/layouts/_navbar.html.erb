@@ -1,112 +1,123 @@
+
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-      <%= link_to root_path, class:"navbar-brand brand-logo mr-5" do%><img src="<%= asset_path('logo.png')%>" class="mr-2" alt="logo"/><% end %>
-      <%= link_to root_path, class:"navbar-brand brand-logo-mini" do %><img src="<%= asset_path('logo.png') %>" alt="logo"/><%end%>
-    </div>
-    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-      <button class="navbar-toggler navbar-toggler align-self-center" 
-        type="button" 
-        data-toggle="minimize">
-        <span class="ti-menu"></span>
-      </button>
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <%= link_to root_path, class:"navbar-brand brand-logo mr-5" do %>
+      <img src="<%= asset_path('logo.png')%>" class="mr-2" alt="logo"/>
+    <% end %>
+    <%= link_to root_path, class:"navbar-brand brand-logo-mini" do %>
+      <img src="<%= asset_path('logo.png') %>" alt="logo"/>
+    <% end %>
+    <button class="navbar-toggler navbar-toggler align-self-center" 
+      type="button" 
+      data-toggle="minimize">
+      <span class="ti-menu"></span>
+    </button>
+  </div>
       
-      <ul class="navbar-nav mr-lg-2">
-        <li class="nav-item nav-search d-none d-lg-block">
-          <% if controller_name == 'products' && @q.present? %>
-            <ul class="navbar-nav me-lg-2">
-              <li class="nav-item nav-search d-none d-lg-block">
-                <%= search_form_for @q, url: products_path, local: true, 
-                    class: "input-group",
-                    style: "min-width: 300px;" do |f| %>
-                  <span class="input-group-text bg-white border-end-0">
-                    <i class="ti ti-search text-muted"></i>
-                  </span>
-                  <%= f.search_field :name_or_description_cont, 
-                      class: "form-control border-start-0", 
-                      placeholder: "Search products...",
-                      style: "box-shadow: none;" %>
-                <% end %>
-              </li>
-            </ul>
+  <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+    <button class="navbar-toggler navbar-toggler align-self-center d-lg-none" 
+            type="button" 
+            data-bs-toggle="minimize">
+      <i class="bi-list"></i>
+    </button>
+    
+    <ul class="navbar-nav mr-lg-2 d-none d-lg-flex">
+      <% if controller_name == 'products' && @q.present? %>
+        <li class="nav-item nav-search">
+          <%= search_form_for @q, url: products_path, local: true, 
+              class: "input-group",
+              style: "min-width: 300px;" do |f| %>
+            <span class="input-group-text bg-white border-end-0">
+              <i class="bi-search text-muted"></i>
+            </span>
+            <%= f.search_field :name_or_description_cont, 
+                class: "form-control border-start-0", 
+                placeholder: "Search products...",
+                style: "box-shadow: none;" %>
           <% end %>
         </li>
-      </ul>
-      <ul class="navbar-nav navbar-nav-right">
-        <li class="nav-item dropdown">
-          <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-            <i class="ti-bell mx-0"></i>
-            <span class="count"></span>
+      <% end %>
+    </ul>
+    
+    <ul class="navbar-nav navbar-nav-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link count-indicator dropdown-toggle" 
+           id="notificationDropdown" 
+           href="#" 
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
+          <i class="bi-bell mx-0"></i>
+          <span class="count"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" 
+             aria-labelledby="notificationDropdown">
+          <h6 class="mb-0 font-weight-normal dropdown-header">Notifications</h6>
+          <div class="dropdown-divider"></div>
+          
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-success">
+                <i class="bi-info-circle mx-0"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <h6 class="preview-subject font-weight-normal">Application Error</h6>
+              <p class="font-weight-light small-text mb-0 text-muted">Just now</p>
+            </div>
           </a>
-          <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-success">
-                  <i class="ti-info-alt mx-0"></i>
-                </div>
+          
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-warning">
+                <i class="bi-gear mx-0"></i>
               </div>
-              <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                <p class="font-weight-light small-text mb-0 text-muted">
-                  Just now
-                </p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-warning">
-                  <i class="ti-settings mx-0"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">Settings</h6>
-                <p class="font-weight-light small-text mb-0 text-muted">
-                  Private message
-                </p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-info">
-                  <i class="ti-user mx-0"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                <p class="font-weight-light small-text mb-0 text-muted">
-                  2 days ago
-                </p>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-            <% if user_signed_in? %>
-              <%= user_avatar(current_user, size: 40) %>
-            <% else %>
-              <span class="bi bi-person-circle rounded-circle" style="font-size: 40px; color: #ccc;"></span>
-            <% end %>
+            </div>
+            <div class="preview-item-content">
+              <h6 class="preview-subject font-weight-normal">Settings</h6>
+              <p class="font-weight-light small-text mb-0 text-muted">Private message</p>
+            </div>
           </a>
-          <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <%= link_to user_path(current_user), class: "dropdown-item" do %>
-              <i class="ti-settings text-primary"></i>
-              <span class="ms-2">Settings</span>
-            <% end %>
-            <a class="dropdown-item">
-              <i class="ti-power-off text-primary"></i>
-             <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-sm ms-2" %>
-            </a>
-          </div>
-        </li>
-        <li class="nav-item nav-settings d-none d-lg-flex">
-          <a class="nav-link" href="#">
-            <i class="icon-ellipsis"></i>
+          
+          <a class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-info">
+                <i class="bi-person mx-0"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <h6 class="preview-subject font-weight-normal">New user registration</h6>
+              <p class="font-weight-light small-text mb-0 text-muted">2 days ago</p>
+            </div>
           </a>
-        </li>
-      </ul>
-      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-        <span class="icon-menu"></span>
-      </button>
-    </div>
-  </nav>
+        </div>
+      </li>
+      
+      <li class="nav-item nav-profile dropdown">
+        <a class="nav-link dropdown-toggle" 
+           href="#" 
+           data-bs-toggle="dropdown" 
+           id="profileDropdown"
+           aria-expanded="false">
+          <% if user_signed_in? %>
+            <%= user_avatar(current_user, size: 40) %>
+          <% else %>
+            <i class="bi-person-circle" style="font-size: 32px; color: #ccc;"></i>
+          <% end %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end navbar-dropdown" 
+             aria-labelledby="profileDropdown">
+          <%= link_to user_path(current_user), class: "dropdown-item d-flex align-items-center" do %>
+            <i class="bi-gear text-primary me-2"></i>
+            <span>Settings</span>
+          <% end %>
+          <div class="dropdown-divider"></div>
+          <%= button_to destroy_user_session_path, 
+              method: :delete, 
+              class: "dropdown-item d-flex align-items-center" do %>
+            <i class="bi-power text-primary me-2"></i>
+            <span>Logout</span>
+          <% end %>
+        </div>
+      </li>
+  </div>
+</nav>
