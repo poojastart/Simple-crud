@@ -21,12 +21,15 @@
   </head>
 
   <body>
-    <% if notice.present? %>
-      <div class="notice alert alert-success text-center"><%= notice %></div>
-    <% end %>
-    <% if alert.present? %>
-      <div class="alert alert-danger text-center"><%= alert %></div>
-    <% end %>
+    <div id="flash">
+      <% if notice.present? %>
+        <div class="notice alert alert-success text-center"><%= notice %></div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="alert alert-danger text-center"><%= alert %></div>
+      <% end %>
+    </div>
+
     <%= render 'layouts/announcement_bar' %>
     <%= yield %>
     

@@ -15,8 +15,8 @@ class ProductsController < ApplicationController
     @product = current_user.products.build(product_params)
     if @product.save
       respond_to do |format|
-        format.html { redirect_to @product, notice: 'Product created successfully', status: :see_other }
         format.turbo_stream { redirect_to @product, notice: 'Product created successfully', status: :see_other }
+        format.html { redirect_to @product, notice: 'Product created successfully', status: :see_other }
       end
     else
       render :new, status: :unprocessable_entity
@@ -33,7 +33,10 @@ class ProductsController < ApplicationController
     
     if @product.update(product_params)
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream do
+          flash.now[:notie] = "Product updated successfully"
+          render :update
+        end
         format.html { redirect_to @product, notice: 'Product Updted successfully' }
       end
     else
