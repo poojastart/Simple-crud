@@ -21,6 +21,9 @@
   </head>
 
   <body>
+    <%= turbo_stream_from "products" %>
+    <%= turbo_stream_from "categories" %>
+
     <div id="flash">
       <% if notice.present? %>
         <div class="notice alert alert-success text-center"><%= notice %></div>

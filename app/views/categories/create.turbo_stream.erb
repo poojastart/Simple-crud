@@ -1,10 +1,7 @@
-<turbo-stream action="append" target="categories">
-  <template>
-    <%= render partial: "categories/category", formats: [:html], locals: { category: @category } %>
-  </template>
-</turbo-stream>
-<turbo-stream action="replace" target="category_form">
-  <template>
-    <%= render partial: 'form', formats: [:html], locals: { category: Category.new } %>
-  </template>
-</turbo-stream> 
+<%= turbo_stream.append "categories", partial: "categories/category", locals: { category: @category } %>
+<%= turbo_stream.replace "flash" do %>
+  <%= render 'layouts/flash' %>
+<% end %>
+<%= turbo_stream.replace "new_category" do %>
+  <%= render partial: "categories/show_category", locals: { category: @category } %>
+<% end %>

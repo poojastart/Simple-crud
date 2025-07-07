@@ -1,0 +1,8 @@
+<div class = "empty-state">
+    <p class = "empty-state__text">
+        "No products found. Please add a new product to get started."
+    </p>
+    <div class="mb-3">
+        <%= link_to "Add Product", new_product_path, class: "btn btn-outline-primary", data: { turbo_frame: "_top" } %>
+    </div>
+</div>

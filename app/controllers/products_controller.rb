@@ -15,8 +15,11 @@ class ProductsController < ApplicationController
     @product = current_user.products.build(product_params)
     if @product.save
       respond_to do |format|
-        format.turbo_stream { redirect_to @product, notice: 'Product created successfully', status: :see_other }
-        format.html { redirect_to @product, notice: 'Product created successfully', status: :see_other }
+        format.turbo_stream do
+          flash.now[:success] = "Product created successfully"
+          render :create
+        end
+        format.html { redirect_to @product, success: 'Product created successfully' }
       end
     else
       render :new, status: :unprocessable_entity
@@ -34,10 +37,10 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       respond_to do |format|
         format.turbo_stream do
-          flash.now[:notie] = "Product updated successfully"
+          flash.now[:success] = "Product updated successfully"
           render :update
         end
-        format.html { redirect_to @product, notice: 'Product Updted successfully' }
+        format.html { redirect_to @product, success: 'Product Updted successfully' }
       end
     else
       respond_to do |format|
@@ -48,10 +51,14 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    @products = Product.all
     if @product.destroy
       respond_to do |format|
-        format.html{ redirect_to @products, notice: 'Product deleted successfully' }
-        format.turbo_stream
+        format.turbo_stream do
+          flash.now[:success] = "Product deleted successfully"
+          render :destroy
+        end
+        format.html{ redirect_to @products, success: 'Product deleted successfully' }
       end
     end
   end

@@ -122,3 +122,15 @@ body {
 .sidebar-icon-only .sidebar .nav-item .collapse {
     display: none !important;
 }
+.empty-state {
+  padding: var(--space-m);
+
+  text-align: center;
+
+  &__text {
+    font-size: var(--font-size-l);
+    color: var(--color-text-header);
+    margin-bottom: var(--space-l);
+    font-weight: bold;
+  }
+}

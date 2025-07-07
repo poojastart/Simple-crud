@@ -1,2 +1,7 @@
 <%= turbo_stream.append "products", partial: "products/product", locals: { product: @product } %>
-<%= turbo_stream.update Product.new, "" %>
+<%= turbo_stream.replace "flash" do %>
+  <%= render 'layouts/flash' %>
+<% end %>
+<%= turbo_stream.replace "new_product" do %>
+  <%= render partial: "products/show_product", locals: { product: @product } %>
+<% end %>
